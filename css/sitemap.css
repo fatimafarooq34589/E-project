@@ -1,0 +1,166 @@
+/* ==============================
+   Sitemap Page — Clean Version
+   ============================== */
+
+.sitemap-page {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Cinzel Decorative', serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.5s ease, color 0.5s ease;
+  overflow-x: hidden; /* allow vertical scroll */
+}
+
+/* -----------------------------
+   Animated Background (Single Layer)
+------------------------------ */
+.sitemap-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.05),
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 215, 0, 0.05)
+  );
+  filter: blur(20px);
+  animation: shimmerMove 40s linear infinite;
+  pointer-events: none;
+}
+
+.sitemap-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle, rgba(255, 215, 0, 0.1) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 215, 0, 0.07) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 215, 0, 0.05) 0.8px, transparent 0.8px);
+  background-size: 60px 60px, 120px 120px, 180px 180px;
+  opacity: 0.5;
+  animation: glimmerMove 90s linear infinite;
+  pointer-events: none;
+}
+
+/* Light Mode Adjustments */
+.light-mode.sitemap-page::before {
+  background: linear-gradient(
+    45deg,
+    rgba(194, 139, 42, 0.05),
+    rgba(194, 139, 42, 0.1),
+    rgba(194, 139, 42, 0.05)
+  );
+}
+
+.light-mode.sitemap-page::after {
+  background-image:
+    radial-gradient(circle, rgba(194,139,42,0.12) 2px, transparent 2px),
+    radial-gradient(circle, rgba(194,139,42,0.08) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(194,139,42,0.05) 1px, transparent 1px);
+}
+
+/* -----------------------------
+   Animations
+------------------------------ */
+@keyframes shimmerMove {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes glimmerMove {
+  0%   { background-position: 0 0, 0 0, 0 0; }
+  50%  { background-position: 200px 150px, 300px 100px, 400px 250px; }
+  100% { background-position: 0 0, 0 0, 0 0; }
+}
+
+/* -----------------------------
+   Sitemap Layout
+------------------------------ */
+.sitemap-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 40px 20px;
+}
+
+.sitemap-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+  text-align: center;
+  padding: 40px 60px;
+  max-width: 700px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+}
+
+.sitemap-container h1 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.sitemap-container p {
+  margin-bottom: 25px;
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.sitemap-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: left;
+}
+
+.sitemap-container ul li {
+  margin: 10px 0;
+}
+
+.sitemap-container ul li a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.sitemap-container ul li a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 6px var(--accent);
+}
+
+/* -----------------------------
+   Footer + Go Back Button
+------------------------------ */
+.sitemap-page footer {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
+  background: transparent;
+}
+
+.sitemap-page .back-btn {
+  display: inline-block;
+  margin-top: 35px;
+  background: var(--accent);
+  color: var(--bg-color);
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.sitemap-page .back-btn:hover {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}

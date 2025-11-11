@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
+
+/* nav.css */
+
+:root {
+  --bg-color: #0b0b0b;
+  --text-color: #ffffff;
+  --accent: #ffd700;
+  --link-color: #ffeb9a;
+   /* ... Existing variables ... */
+  --card-bg: #1a1a1a; /* Dark Mode Card background */
+  --card-border: rgba(255, 215, 0, 0.2);
+  --text-color-dark: #ffec9e; 
+  --text-color-soft: #aaa;
+}
+
+.light-mode {
+  --bg-color: #faf6e8;
+  --text-color: #2c2c2c;
+  --accent: #c28b2a;
+  --link-color: #a87400;
+   /* ... Existing variables ... */
+  --card-bg: #f9f7f2; /* Light Mode Card background */
+  --card-border: #d0c9b8;
+  --text-color-dark: #4b3e2a;
+  --text-color-soft: #6b5f4f;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  font-family: 'Cinzel Decorative', serif;
+  color: var(--text-color);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px 40px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background 0.5s ease;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+}
+.logo svg {
+  width: 45px;
+  height: 45px;
+  animation: rotate 8s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+}
+.logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ffec9e, #e2b44c, #c28b2a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.logo-text::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: shine 3s linear infinite;
+}
+.logo-sub {
+  display: block;
+  font-size: 10px;
+  color: #ffda77;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links li a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 8px 5px;
+  display: block;
+  transition: 0.3s;
+}
+.nav-links li a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Dropdown */
+.nav-links li.account .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--bg-color);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  min-width: 120px;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.nav-links li.account:hover .dropdown {
+  display: block;
+}
+.nav-links li.account .dropdown a {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--link-color);
+}
+.nav-links li.account .dropdown a:hover {
+  background-color: rgba(255,215,0,0.1);
+  color: var(--accent);
+}
+
+/* Toggle Button */
+.toggle-btn {
+  background: none;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  margin-left: 15px; /* Hamburger se gap ke liye */
+}
+.toggle-btn:hover {
+  background: var(--accent);
+  color: var(--bg-color);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+/* --- NEW: Hamburger Button Styling (Default/Desktop: Hidden) --- */
+.hamburger-btn {
+  display: none; 
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px;
+  z-index: 101;
+  transition: color 0.3s ease;
+}
+
+.hamburger-btn i {
+  width: 30px;
+  height: 30px;
+}
+
+.hamburger-btn:hover {
+  color: var(--link-color);
+}
+/* Animations */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Responsive (Updated to match the image) */
+@media (max-width: 768px) {
+  
+  /* 1. Navbar Layout: Logo left, Hamburger & Toggle right */
+  .navbar {
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    padding: 15px 20px;
+    /* justify-content: space-between; pehle se hi hai */
+  }
+
+  /* Hamburger button ko mobile par dikhayein */
+  .hamburger-btn {
+    display: block; 
+    margin-left: auto; /* Logo se door push karne ke liye */
+    margin-right: 10px; 
+    order: 2; 
+    
+  }
+  
+  /* Toggle button ki position adjust karein */
+  .toggle-btn {
+    order: 3; 
+    z-index: 101;
+  }
+
+  /* 2. Navigation Links: Full-height, fixed sidebar/dropdown effect */
+  .nav-links {
+    /* Default: Hide links */
+    display: none; 
+    flex-direction: column;
+    width: 100%;
+    
+    /* Full screen position */
+    position: fixed; 
+    top: 69px; /* Navbar height ke neeche se shuru */
+    left: 0;
+    height: calc(100vh - 69px); /* Baki screen height */
+    overflow-y: auto; /* Agar links zyada hon to scroll ho */
+
+    background-color: var(--bg-color); 
+    border-top: 1px solid var(--card-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 90; 
+    
+    /* Links ko center mein laane ke liye */
+    align-items: center;
+    gap: 0;
+    padding: 20px 0;
+  }
+  
+  /* 3. 'open' class hone par links ko dikhayein */
+  .nav-links.open {
+    display: flex; /* JavaScript se yeh class lagne par links dikhenge */
+  }
+  
+  /* Mobile Link Styles */
+  .nav-links li {
+    width: 80%;
+    text-align: center; 
+    border-bottom: 1px solid rgba(255, 215, 0, 0.05);
+  }
+  
+  .nav-links li:last-child {
+      border-bottom: none;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    padding: 15px 20px; 
+    font-size: 18px; 
+  }
+  
+  /* Mobile Dropdown styles (To show sub-links directly) */
+  .nav-links li.account .dropdown {
+    display: flex; 
+    flex-direction: column;
+    position: static;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+  }
+  
+  /* Dropdown links ke styles */
+  .nav-links li.account .dropdown a {
+    padding: 5px 10px;
+    font-size: 16px; 
+    color: var(--text-color-soft); 
+    background: none;
+    text-align: center; 
+  }
+}
+
+#navbar-placeholder, 
+#navbar-placeholder * {
+  font-family: 'Cinzel Decorative', serif !important;
+}
+
+/* Position the particle layer */
+#particle-background {
+    position: fixed; /* Fixed hi rehne dein */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Peeche hi rehne dein */
+    pointer-events: none;
+}
+
+/* style.css - Is block ko dhoond kar replace karein */
+
+#particle-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 💡 Yahan change karein: Opacity 0.05 se 0.15, aur size 20px se 10px */
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 2px, transparent 2px); /* Golden color use kiya */
+    background-size: 10px 10px; /* Particles zyada kareeb aayenge */
+    
+    /* Animation: Background ko slowly move karna */
+    animation: moveBackground 60s linear infinite;
+    
+    /* NEW: Ek halka blur effect dein, taake woh background se blend ho jayen */
+    filter: blur(0.5px); 
+}
+
+/* Light Mode ke liye bhi set karein */
+.light-mode #particle-background::before {
+    background: radial-gradient(circle, rgba(194, 139, 42, 0.25) 2px, transparent 2px); /* Brownish Golden color */
+}
+
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}

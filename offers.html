@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offers</title>
+    <link rel="stylesheet" href="./css/offers.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/footer.css">
+     <!--favicon  -->
+    <link rel="icon" type="image/x-icon" href="./images/logo.png">
+</head>
+<body>
+
+<!-- Particle background (optional) -->
+<div id="particle-background"></div>
+
+<!-- navbar -->
+<nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="cashewGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffec9e"/>
+                        <stop offset="100%" stop-color="#c28b2a"/>
+                    </linearGradient>
+                </defs>
+                <path d="M50,10 C70,20 90,45 75,70 C60,90 30,90 25,60 C20,30 35,10 50,10Z"
+                      fill="url(#cashewGradient)" stroke="#b37d2c" stroke-width="2"/>
+                <path d="M55,20 C65,30 75,50 65,65"
+                      stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" />
+            </svg>
+
+            <div>
+                <div class="logo-text">Maru</div>
+                <span class="logo-sub">Dry Fruits</span>
+            </div>
+        </a>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation">
+            <i data-lucide="menu"></i>
+        </button>
+
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">HOME</a></li>
+            
+            <li class="account">
+                <a href="#">DISCOUNT ▼</a>
+                <div class="dropdown">
+                    <a href="festivalgifts.html">FESTIVAL GIFTS</a>
+                    <a href="offers.html">OFFERS</a>
+                </div>
+            </li>
+        
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="contactus.html">CONTACT</a></li>
+            
+            <li class="account">
+                <a href="#">ACCOUNT ▼</a>
+                <div class="dropdown">
+                    <a href="signin.html">Sign In</a>
+                    <a href="signup.html">Sign Up</a>
+                </div>
+            </li>
+            
+            <li><a href="Disclaimer.html">DISCLAIMER</a></li>
+            <li><a href="cart.html">🛒Cart</a></li>
+        </ul>
+        
+</nav>
+
+<!-- Offers Section -->
+<section class="offers-section">
+  <h2>Special Offers & Discounts</h2>
+
+  <div class="offers-container">
+    <div class="offer-card visible">
+      <img src="./images/download (6).jpg" alt="Almonds Offer">
+      <h3>30% Off on Almonds</h3>
+      <p>Grab premium quality almonds at a discounted price for a limited time.</p>
+      <button class="cta-button">Shop Now</button>
+    </div>
+
+    <div class="offer-card visible">
+      <img src="./images/mixdates.jpeg" alt="Dates Offer">
+      <h3>Buy 1kg Mix-Dates, Get 100g Free</h3>
+      <p>Enjoy our delicious dates with a special free bonus offer.</p>
+      <button class="cta-button">Shop Now</button>
+
+    </div>
+
+    <div class="offer-card visible">
+      <img src="./images/download (1).jpg" alt="Walnuts Offer">
+      <h3>25% Off on Walnuts</h3>
+      <p>Get crunchy, premium-quality walnuts at an amazing discount this week!</p>
+      <button class="cta-button">Shop Now</button>
+
+    </div>
+  </div>
+</section>
+
+<!-- Modern Popup for Offers Page -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup">
+    <span class="close" id="closePopup">&times;</span>
+
+    <div class="popup-image">
+      <img src="images/almonds.jpg" alt="Product Image" id="popupImg">
+    </div>
+
+    <div class="popup-details">
+      <h2 id="popupName">Product Name</h2>
+      <p id="popupDesc">Product short description goes here.</p>
+
+      <div class="popup-top">
+        <div class="popup-size-selector">
+          <select id="popupSize">
+            <option value="250g">250g</option>
+            <option value="500g">500g</option>
+            <option value="1kg" selected>1kg</option>
+          </select>
+        </div>
+
+        <div class="popup-price-section">
+          <span id="popupCutPrice" class="old-price">Rs. 1200</span>
+          <span id="popupPrice" class="current-price">Rs. 999</span>
+        </div>
+      </div>
+
+      <div class="popup-quantity-control">
+        <button class="minus">-</button>
+        <input type="number" id="popupQty" value="1" min="1">
+        <button class="plus">+</button>
+      </div>
+
+     <div class="popup-actions">
+    <button id="addToCartBtn">Add to Cart</button>
+    <div id="afterAddActions" style="display: none; margin-top: 10px;">
+        <button id="continueShoppingBtn">Continue Shopping</button>
+        <button id="goToCartBtn">Go to Cart</button>
+    </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+
+<!-- JS Scripts -->
+<script src="./js/footer.js" defer></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="./js/nav.js"></script>
+
+<!-- Scroll animation -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const offerCards = document.querySelectorAll('.offer-card');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  offerCards.forEach(card => observer.observe(card));
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ✅ Popup elements
+  const popup = document.getElementById('popupOverlay');
+  const closeBtn = document.getElementById('closePopup');
+  const shopButtons = document.querySelectorAll('.cta-button');
+
+  const popupImg = document.getElementById('popupImg');
+  const popupTitle = document.getElementById('popupName');
+  const popupDesc = document.getElementById('popupDesc');
+  const quantityInput = document.getElementById('popupQty');
+  const plusBtn = document.querySelector('.plus');
+  const minusBtn = document.querySelector('.minus');
+  const weightSelect = document.getElementById('popupSize');
+  const addToCartBtn = document.getElementById('addToCartBtn');
+  const priceEl = document.getElementById('popupPrice');
+  const cutPriceEl = document.getElementById('popupCutPrice');
+
+  // ✅ Product price data
+  const productPrices = {
+    "Almond": { price: 3150, cut: 3500 },
+    "Walnuts": { price: 4500, cut: 5000 },
+    "Mix-Dates": { price: 2500, cut: 3000 }
+  };
+
+  let currentProduct = "";
+
+  // 🔄 Update price dynamically
+  function updatePrice() {
+    const quantity = parseInt(quantityInput.value);
+    const weight = weightSelect.value;
+    let factor = 1;
+    if (weight === "250g") factor = 0.25;
+    else if (weight === "500g") factor = 0.5;
+
+    const basePrice = productPrices[currentProduct].price * factor * quantity;
+    const baseCut = productPrices[currentProduct].cut * factor * quantity;
+
+    priceEl.textContent = "₹" + basePrice.toFixed(0);
+    cutPriceEl.textContent = "₹" + baseCut.toFixed(0);
+  }
+
+  // ✅ Open popup on Shop Now click
+  shopButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.offer-card');
+      const imgSrc = card.querySelector('img').src;
+      const title = card.querySelector('h3').textContent;
+      const desc = card.querySelector('p').textContent;
+
+      // Determine product key from title
+      if (title.includes("Almond")) currentProduct = "Almond";
+      else if (title.includes("Walnut")) currentProduct = "Walnuts";
+      else currentProduct = "Mix-Dates";
+
+      popupImg.src = imgSrc;
+      popupTitle.textContent = title;
+      popupDesc.textContent = desc;
+      quantityInput.value = 1;
+      weightSelect.value = "1kg";
+      updatePrice();
+
+      popup.style.display = 'flex';
+    });
+  });
+
+  // ✅ Close popup
+  closeBtn.addEventListener('click', () => popup.style.display = 'none');
+  window.addEventListener('click', (e) => {
+    if (e.target === popup) popup.style.display = 'none';
+  });
+
+  // ✅ Quantity buttons
+  plusBtn.addEventListener('click', () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+    updatePrice();
+  });
+  minusBtn.addEventListener('click', () => {
+    if (parseInt(quantityInput.value) > 1) quantityInput.value = parseInt(quantityInput.value) - 1;
+    updatePrice();
+  });
+
+  quantityInput.addEventListener('input', () => {
+    if (parseInt(quantityInput.value) < 1) quantityInput.value = 1;
+    updatePrice();
+  });
+
+  // Weight change updates price
+  weightSelect.addEventListener('change', updatePrice);
+
+  // ✅ Add to cart
+  addToCartBtn.addEventListener('click', () => {
+    const cartItem = {
+      name: currentProduct,
+      image: popupImg.src,
+      size: weightSelect.value,
+      quantity: parseInt(quantityInput.value),
+      price: parseInt(priceEl.textContent.replace("₹", ""))
+    };
+
+    // Use localStorage to match cart.js
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    alert(`${currentProduct} has been added to your cart!`);
+    popup.style.display = 'none'; // optional: close popup after adding
+  });
+});
+</script>
+
+
+
+
+
+
+</body>
+</html>

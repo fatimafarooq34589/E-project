@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard - Maru Dry Fruits</title>
+  <link rel="stylesheet" href="./css/nav.css">
+  <link rel="stylesheet" href="./css/footer.css">
+  <style>
+    /*Excellent — you’ve built everything ✅
+Now let’s go step-by-step to make sure you see your data and logs in the console.
+If nothing appears, it’s usually just because of where to look or when scripts run.
+
+🧭 Step-by-Step Debug Guide
+🧩 1. Make sure all your JS files are linked correctly
+Check the bottom of each HTML file.
+Example (for signup page):
+<script src="./js/localStorage.js" defer></script>
+<script src="./js/signup.js" defer></script>
+
+✅ Important: defer ensures scripts run after the page loads.
+❌ Don’t put these <script> tags in <head> unless they have defer.
+Then open Console → refresh the page (F5) — if paths are wrong, you’ll see a red error like:
+Failed to load resource: the server responded with a status of 404
+
+If that appears, fix the path.
+
+🧩 2. Open DevTools Correctly
+
+
+Open your page in Live Server.
+
+
+Right-click anywhere → choose Inspect.
+
+
+Click the Console tab.
+
+
+(Optional) Also click the Application tab → expand Local Storage and Session Storage in the sidebar.
+
+
+
+🧩 3. Test on the Signup Page
+
+
+Fill out the form.
+
+
+Click Sign Up.
+
+
+Check Console → you should see:
+User registered: {name: "John Doe", email: "john@email.com"}
+Saved in Local Storage: {name: "John Doe", email: "john@email.com", password: "1234"}
+
+
+
+Check Application → Local Storage → your site URL → expand → see:
+Key: users
+Value: [{"name":"John Doe","email":"john@email.com","password":"1234"}]
+
+
+
+If you see that — perfect. ✅
+
+🧩 4. Test on the Sign-In Page
+
+
+Enter the same email/password.
+
+
+Click Sign In.
+
+
+Console should show:
+Logged in user: {name: "John Doe", email: "john@email.com"}
+Active user set in Session Storage: {name: "John Doe", email: "john@email.com"}
+
+
+
+Check Application → Session Storage → your site URL — you’ll see:
+Key: activeUser
+Value: {"name":"John Doe","email":"john@email.com","password":"1234"}
+
+
+
+If nothing shows → ensure:
+
+
+You actually called console.log() inside signin.js (see my code).
+
+
+No errors appear in red at top of console (fix those first).
+
+
+
+🧩 5. Test on the Dashboard Page
+
+
+After signing in, you’ll be redirected to dashboard.html.
+
+
+In console, you should see:
+Active user set in Session Storage: {name: "John Doe", ...}
+
+and the page will display:
+Welcome, John Doe!
+
+
+
+⚠️ If Still Nothing Appears
+Check each of these:
+IssueFixJS file not foundSee red 404 → fix script pathScript runs too earlyAdd defer in <script> tagsCached filePress Ctrl + F5 to hard refreshJS syntax errorRed text in console stops all scripts below itLive Server not runningUse Go Live button in VS Code
+
+If you’d like, you can copy your console (red error) message here, and I’ll tell you exactly what it means and how to fix it.
+Would you like to do that?*/
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: bold;
+      color: #27ae60;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- navbar -->
+<nav class="navbar">
+        <a href="index.html" class="logo">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="cashewGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffec9e"/>
+                        <stop offset="100%" stop-color="#c28b2a"/>
+                    </linearGradient>
+                </defs>
+                <path d="M50,10 C70,20 90,45 75,70 C60,90 30,90 25,60 C20,30 35,10 50,10Z"
+                      fill="url(#cashewGradient)" stroke="#b37d2c" stroke-width="2"/>
+                <path d="M55,20 C65,30 75,50 65,65"
+                      stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" />
+            </svg>
+
+            <div>
+                <div class="logo-text">Maru</div>
+                <span class="logo-sub">Dry Fruits</span>
+            </div>
+        </a>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation">
+            <i data-lucide="menu"></i>
+        </button>
+
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">HOME</a></li>
+            
+            <li class="account">
+                <a href="#">DISCOUNT ▼</a>
+                <div class="dropdown">
+                    <a href="festivalgifts.html">FESTIVAL GIFTS</a>
+                    <a href="offers.html">OFFERS</a>
+                </div>
+            </li>
+        
+            <li><a href="aboutus.html">ABOUT US</a></li>
+            <li><a href="contactus.html">CONTACT</a></li>
+            
+            <li class="account">
+                <a href="#">ACCOUNT ▼</a>
+                <div class="dropdown">
+                    <a href="signin.html">Sign In</a>
+                    <a href="signup.html">Sign Up</a>
+                </div>
+            </li>
+            
+            <li><a href="Disclaimer.html">DISCLAIMER</a></li>
+            <li><a href="cart.html">🛒Cart</a></li>
+        </ul>
+        
+</nav>
+
+  <div class="dashboard-container">
+    <div class="brand">Maru Dry Fruits</div>
+    <h1 id="welcomeMessage">Welcome!</h1>
+    <p>We’re glad to have you back.</p>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="./js/footer.js" defer></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./js/nav.js"></script>
+  <script src="./js/sessionStorage.js" defer></script>
+  <script src="./js/dashboard.js" defer></script>
+
+</body>
+</html>

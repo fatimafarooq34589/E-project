@@ -1,0 +1,381 @@
+/* ===== Gifting Page Styles (Modern Theme) ===== */
+
+/* --- Scope styles to gifting page only --- */
+.gifting-page {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color); /* Modern background linked to navbar theme */
+  color: var(--text-color);
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Card Section */
+.gifting-page .card {
+  text-align: center;
+  /* Use a viewport-based padding for vertical scaling */
+  padding: 8vw 20px; /* Adjusted from fixed 60px */
+}
+
+.gifting-page .card h1 {
+  color: var(--accent); /* Golden accent for headings */
+  /* Fluid typography for heading: clamp(min-size, preferred-viewport-size, max-size) */
+  font-size: clamp(28px, 5vw, 36px); 
+  margin-bottom: clamp(30px, 7vw, 50px); /* Responsive margin */
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
+}
+
+/* Section Layout */
+.gifting-page .section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 40px;
+  padding: 25px 40px;
+  background-color: var(--bg-color); /* Subtle modern card bg */
+  border-radius: 16px;
+  border: 2px solid var(--card-border);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Alternate layout */
+.gifting-page .section:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Image Styles */
+.gifting-page .section img {
+  width: 33%;
+  height: 280px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.gifting-page .section img:hover {
+  transform: scale(1.03);
+}
+
+/* heading (This seems to be a generic style; keeping it for consistency)*/
+h1 {
+  font-family: 'Cinzel Decorative', serif; /* consistent with navbar */
+  /* Making this general h1 also responsive */
+  font-size: clamp(28px, 5vw, 36px); 
+  color: #ffd700; /* gold accent like navbar */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Text Content */
+.gifting-page .text-content {
+  width: 55%;
+  text-align: justify;
+}
+
+.gifting-page .text-content h2 {
+  color: var(--accent);
+  /* Making h2 slightly more responsive */
+  font-size: clamp(20px, 3.5vw, 24px); 
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.gifting-page .text-content p {
+  line-height: 1.6;
+  font-size: 15px;
+  color: var(--text-color);
+}
+
+/* Responsive for main sections (Tablet/Smaller Desktop) */
+@media (max-width: 900px) {
+  .gifting-page .section {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 15px; /* Reduced horizontal padding */
+    max-width: 100%;
+    gap: 20px; /* Reduced gap */
+  }
+
+  /* Make sure alternating sections also stack correctly */
+  .gifting-page .section:nth-child(even) {
+    flex-direction: column; 
+  }
+
+  .gifting-page .section img {
+    width: 80%; /* Smaller image on tablet, not full 100% width */
+    height: auto;
+    max-height: 250px; /* Limit max height */
+  }
+
+  .gifting-page .text-content {
+    width: 95%; /* Adjusted width */
+    text-align: center;
+  }
+}
+
+/* Very Small Mobile Optimization (e.g., iPhone 5/SE size) */
+@media (max-width: 480px) {
+    .gifting-page .card {
+        padding: 5vw 10px;
+    }
+    .gifting-page .section {
+        padding: 15px 10px;
+        margin-bottom: 20px;
+    }
+    .gifting-page .section img {
+        width: 100%; /* Full width on smallest screens */
+    }
+}
+
+.quick-shop{
+  padding: 10px clamp(30px, 8vw, 60px); /* Responsive padding */
+  border-radius: 10px;
+  background-color: #ffd700;
+  text-decoration: none;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: black;
+}
+
+
+/* ================================
+   POPUP – LUXURY DARK THEME (FINAL)
+================================ */
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Popup Box */
+.popup {
+  background: linear-gradient(145deg, #181818, #212121);
+  color: #fff;
+  width: 90%;
+  max-width: 700px;
+  /* Responsive padding for popup */
+  padding: clamp(20px, 5vw, 35px) clamp(15px, 4vw, 28px); 
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  transform: scale(0.9);
+  opacity: 0;
+  animation: popupIn 0.4s forwards;
+}
+
+/* Entry Animations */
+@keyframes popupIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Close Button */
+.popup .close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,215,0,0.15) 0%, rgba(255,215,0,0.05) 100%);
+  color: #ffd700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,215,0,0.3);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+.popup .close:hover {
+  background: radial-gradient(circle, rgba(255,215,0,0.35) 0%, rgba(255,215,0,0.1) 100%);
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.6);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Popup Image */
+.popup-image img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.55);
+}
+
+/* Details Section */
+.popup-details h2 {
+  color: #ffd700;
+  text-align: center;
+  font-size: clamp(1.2rem, 4vw, 1.6rem); /* Responsive font size */
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+.popup-details p {
+  text-align: center;
+  font-size: clamp(14px, 3.5vw, 15px); /* Responsive font size */
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Price Section */
+.popup-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+.popup-price-section .old-price {
+  text-decoration: line-through;
+  color: #777;
+  font-size: 15px;
+}
+.popup-price-section .current-price {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* Quantity Controls */
+.popup-quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.popup-quantity-control button {
+  background: linear-gradient(135deg, #ffd700, #ffcc00);
+  border: none;
+  color: #000;
+  font-size: 18px;
+  padding: 8px 14px;
+  margin: 0 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.popup-quantity-control button:hover {
+  background: linear-gradient(135deg, #ffea00, #ffcc33);
+  transform: scale(1.1);
+}
+.popup-quantity-control input {
+  width: 60px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: #121212;
+  color: #ffd700;
+  padding: 6px;
+}
+
+/* Add to Cart Button (centered) */
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.popup-actions button {
+  padding: 14px 60px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #ffd700, #ffcc00);
+  color: #000;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.popup-actions button:hover {
+  background: linear-gradient(135deg, #ffea00, #ffcc33);
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.7);
+}
+
+/* Responsive for Popup (Tablet/Smaller Desktop) */
+@media (max-width: 700px) {
+  .popup {
+    padding: 22px;
+  }
+  .popup-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .popup-actions button {
+    width: 100%;
+  }
+}
+
+/* New: Responsive for Popup (Smallest Mobile) */
+@media (max-width: 480px) {
+    .popup {
+        /* Smaller border radius and padding for very small screens */
+        border-radius: 14px;
+        padding: 15px 10px; 
+    }
+    
+    .popup .close {
+        /* Slightly smaller close button */
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+        top: 8px;
+        right: 10px;
+    }
+    
+    .popup-actions button {
+        /* Slightly smaller padding on the button for small screens */
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .popup-image img {
+        margin-bottom: 15px;
+    }
+
+    .popup-quantity-control {
+        margin-bottom: 15px;
+    }
+
+    .popup-details h2 {
+        margin-bottom: 8px;
+    }
+}
